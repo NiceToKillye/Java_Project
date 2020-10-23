@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label layoutX="52.0" layoutY="34.0" prefHeight="17.0" prefWidth="128.0" text="Identity number" />
+            <Label layoutX="52.0" layoutY="71.0" text="Date of initial admission" />
+            <Label layoutX="52.0" layoutY="112.0" prefHeight="17.0" prefWidth="128.0" text="Diagnosis" />
+            <Label layoutX="52.0" layoutY="155.0" prefHeight="17.0" prefWidth="128.0" text="Date of invoice" />
+            <TextField editable="false" layoutX="231.0" layoutY="29.0" prefHeight="27.0" prefWidth="188.0" />
+            <TextField editable="false" layoutX="231.0" layoutY="107.0" prefHeight="27.0" prefWidth="188.0" />
+            <DatePicker editable="false" layoutX="231.0" layoutY="66.0" />
+            <DatePicker editable="false" layoutX="231.0" layoutY="150.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Change user" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TabPane layoutX="8.0" layoutY="7.0" prefHeight="352.0" prefWidth="624.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Information">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField layoutX="14.0" layoutY="21.0" promptText="Surname" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="20.0" />
+                              <TextField layoutX="15.0" layoutY="68.0" promptText="Name" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="70.0" />
+                              <TextField layoutX="14.0" layoutY="125.0" promptText="Patronymic" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="120.0" />
+                              <DatePicker editable="false" layoutX="15.0" layoutY="160.0" promptText="Birth date" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="170.0" />
+                              <TextField layoutX="20.0" layoutY="227.0" promptText="Hame adress" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="220.0" />
+                              <TextField editable="false" layoutX="205.0" layoutY="20.0" promptText="Identity number" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="20.0" />
+                              <TextField editable="false" layoutX="205.0" layoutY="70.0" promptText="Doctors' name" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="70.0" />
+                              <Button layoutX="247.0" layoutY="121.0" mnemonicParsing="false" text="Save changes" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Patient Card">
+                  <content>
+                    <AnchorPane prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="600.0">
+                                <columns>
+                                  <TableColumn prefWidth="150.0" text="Identity number" />
+                                  <TableColumn prefWidth="150.0" text="Date of initial admission" />
+                                    <TableColumn prefWidth="150.0" text="DIagnosis" />
+                                    <TableColumn prefWidth="150.0" text="Date of invoice" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
