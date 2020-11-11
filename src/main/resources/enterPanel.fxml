@@ -8,18 +8,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enterPanel">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EnterPanel">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <PasswordField fx:id="passwordField" layoutX="252.0" layoutY="217.0" promptText="Password" />
-            <Label ellipsisString="" layoutX="281.0" layoutY="109.0" prefHeight="51.0" prefWidth="103.0" text="Enter panel" textOverrun="CLIP">
+            <Label ellipsisString="" layoutX="281.0" layoutY="86.0" prefHeight="51.0" prefWidth="103.0" text="Enter panel" textOverrun="CLIP">
                <font>
                   <Font name="Times New Roman Bold" size="20.0" />
                </font>
             </Label>
             <TextField fx:id="loginField" layoutX="252.0" layoutY="173.0" promptText="Login" />
-            <Button fx:id="getInButton" layoutX="252.0" layoutY="263.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="161.0" text="Get in" />
+            <Button fx:id="getInButton" layoutX="252.0" layoutY="263.0" mnemonicParsing="false" onAction="#getIn" prefHeight="27.0" prefWidth="161.0" text="Get in" />
+            <Label fx:id="warning" layoutX="265.0" layoutY="144.0" text="Wrong login or password" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>
