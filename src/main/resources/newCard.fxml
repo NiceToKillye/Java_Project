@@ -32,10 +32,10 @@
                <font>
                   <Font size="20.0" />
                </font></Label>
-            <DatePicker layoutX="132.0" layoutY="107.0" />
-            <ComboBox layoutX="132.0" layoutY="46.0" prefHeight="27.0" prefWidth="188.0" />
-            <Button layoutX="417.0" layoutY="77.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Save" />
-            <Button layoutX="491.0" layoutY="77.0" mnemonicParsing="false" text="Cancel" />
+            <DatePicker fx:id="initialDateField" layoutX="132.0" layoutY="107.0" />
+            <ComboBox fx:id="doctorMenu" layoutX="132.0" layoutY="46.0" prefHeight="27.0" prefWidth="188.0" />
+            <Button layoutX="417.0" layoutY="77.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="57.0" text="Save" />
+            <Button layoutX="491.0" layoutY="77.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
          </children>
     </AnchorPane>
   </children>

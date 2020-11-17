@@ -11,6 +11,12 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "birthday_date")
+    private LocalDate birthdayDate;
+
+    @Column(name = "home_address")
+    private String homeAddress;
+
     private String login;
     private String password;
     private String surname;
@@ -31,12 +37,6 @@ public class Patient {
     public Patient(){
 
     }
-
-    @Column(name = "birthday_date")
-    private LocalDate birthdayDate;
-
-    @Column(name = "home_address")
-    private String homeAddress;
 
     public int getId() {
         return id;

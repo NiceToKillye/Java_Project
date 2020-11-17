@@ -24,6 +24,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReceptionistPanel implements Initializable {
@@ -60,6 +61,24 @@ public class ReceptionistPanel implements Initializable {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         table.setItems(patients);
+
+        table.setRowFactory(tv -> {
+            TableRow<Patient> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Patient rowData = row.getItem();
+                    PatientPanel patientPanel = new PatientPanel(rowData, false);
+                    try {
+                        createWindow(patientPanel);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Double click on: " + rowData.getName());
+                }
+            });
+            return row;
+        });
+
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredPatient.setPredicate(patient -> {
             if(newValue == null || newValue.isEmpty()){
@@ -86,8 +105,8 @@ public class ReceptionistPanel implements Initializable {
 
     @FXML
     void appointment(ActionEvent event) throws IOException {
-        session.close();
-        changeScene(event, "/newCard", "New Card");
+        Patient apPatient = table.getSelectionModel().getSelectedItem();
+        createWindow(new NewCard(apPatient.getId()));
     }
 
     @FXML
@@ -99,6 +118,19 @@ public class ReceptionistPanel implements Initializable {
     @FXML
     void discharge(ActionEvent event) {
         Patient remPatient = table.getSelectionModel().getSelectedItem();
+        List<?> cards = session.createQuery("from PatientCard where patient_id=:patient_id")
+                            .setParameter("patient_id", remPatient.getId()).getResultList();
+        cards.forEach(card -> {
+            try {
+                session.beginTransaction();
+                session.delete(card);
+                session.getTransaction().commit();
+            }
+            catch (Exception ex){
+                session.getTransaction().rollback();
+                System.out.println("The transaction was not completed");
+            }
+        });
         patients.removeAll(remPatient);
         try {
             session.beginTransaction();
@@ -117,16 +149,27 @@ public class ReceptionistPanel implements Initializable {
                 session.createQuery("from Patient", Patient.class).getResultList());
         table.setItems(patients);
         activateSearch();
-
     }
 
-    /*private void createWindow(String panel, String title) throws IOException {
-        Scene scene = new Scene(loadFXML(panel));
+    private void createWindow(PatientPanel patientPanel) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/patientPanel" + ".fxml"));
+        fxmlLoader.setController(patientPanel);
+        Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
-        stage.setTitle(title);
+        stage.setTitle("Patient Panel");
         stage.setScene(scene);
         stage.show();
-    }*/
+    }
+
+    private void createWindow(NewCard newCard) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/newCard" + ".fxml"));
+        fxmlLoader.setController(newCard);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("New Card");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     private void changeScene(ActionEvent event, String panel, String title) throws IOException {
         Scene scene = new Scene(loadFXML(panel));

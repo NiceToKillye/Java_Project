@@ -1,9 +1,6 @@
 package Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -11,31 +8,46 @@ import java.time.LocalDate;
 @Table(name = "PatientCard")
 public class PatientCard implements Serializable {
 
-    private PatientCard(){
+    @EmbeddedId
+    LinkedKey key;
 
-    }
-
-    public PatientCard(int doctorId, int patientId, LocalDate initialDate) {
-        this.doctorId = doctorId;
-        this.patientId = patientId;
-        this.initialDate = initialDate;
-    }
-
-    @Id
-    @Column(name = "doctor_id")
+    //@Id
+    @Column(name = "doctor_id", insertable = false, updatable = false)
     private int doctorId;
 
-    @Id
-    @Column(name = "patient_id")
+    //@Id
+    @Column(name = "patient_id", insertable = false, updatable = false)
     private int patientId;
 
-    @Column(name = "initial_date")
+    @Column(name = "initial_date", insertable = false, updatable = false)
     private LocalDate initialDate;
 
     private String diagnosis;
 
     @Column(name = "invoice_date")
     private LocalDate invoiceDate;
+
+    @Column(name = "doctor_FIO")
+    private String docFIO;
+
+    private PatientCard(){
+
+    }
+
+    public PatientCard(int doctorId, int patientId, LocalDate initialDate, String docFIO) {
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.initialDate = initialDate;
+        this.docFIO = docFIO;
+    }
+
+    public LinkedKey getKey() {
+        return key;
+    }
+
+    public void setKey(LinkedKey key) {
+        this.key = key;
+    }
 
     public int getDoctorId() {
         return doctorId;
@@ -75,5 +87,13 @@ public class PatientCard implements Serializable {
 
     public void setInvoiceDate(LocalDate invoiceDate) {
         this.invoiceDate = invoiceDate;
+    }
+
+    public String getDocFIO() {
+        return docFIO;
+    }
+
+    public void setDocFIO(String docFIO) {
+        this.docFIO = docFIO;
     }
 }

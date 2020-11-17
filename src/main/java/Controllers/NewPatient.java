@@ -1,6 +1,7 @@
 package Controllers;
 
 import Entities.Doctor;
+import Entities.LinkedKey;
 import Entities.Patient;
 import Entities.PatientCard;
 import javafx.collections.FXCollections;
@@ -123,7 +124,10 @@ public class NewPatient implements Initializable {
             System.out.println("The transaction was not completed");
         }
 
-        PatientCard card = new PatientCard(patient.getId(), doc.getId(), initialDate);
+        String docFIO = doc.getSurname() + " " + doc.getName() + " " + doc.getPatronymic();
+        PatientCard card = new PatientCard(doc.getId(), patient.getId(), initialDate, docFIO);
+        LinkedKey key = new LinkedKey(patient.getId(), doc.getId(), initialDate);
+        card.setKey(key);
         try{
             session.beginTransaction();
             session.save(card);

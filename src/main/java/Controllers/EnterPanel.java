@@ -78,22 +78,27 @@ public class EnterPanel {
 
         if (password.equals(admins.get(login))){
             System.out.println("Log in as Admin:" + " Login" + login + " Password:" + password);
-            changeScene(event, "/adminPanel", "Admin Panel");
             session.close();
+            changeScene(event, "/adminPanel", "Admin Panel");
         }
         else if (password.equals(receptionists.get(login))){
             System.out.println("Log in as Receptionist:" + " Login" + login + " Password:" + password);
-            changeScene(event, "/receptionistPanel", "Receptionist Panel");
             session.close();
+            changeScene(event, "/receptionistPanel", "Receptionist Panel");
         }
         else if (password.equals(doctors.get(login))){
             System.out.println("Log in as Doctor:" + " Login" + login + " Password:" + password);
-            changeScene(event, "/doctorPanel", "Doctor Panel");
-            session.close();
+            /*Doctor doctor = (Doctor) session.createQuery("from Doctor where login=:login")
+                    .setParameter("login", login).getSingleResult();
+            DoctorPanel doctorPanel = new DoctorPanel(patient, true);
+            createWindow(event, "/patientPanel", "Patient Panel", doctorPanel);*/
         }
         else if (password.equals(patients.get(login))){
             System.out.println("Log in as Patients:" + " Login" + login + " Password:" + password);
-            changeScene(event, "/patientPanel", "Patient Panel");
+            Patient patient = (Patient) session.createQuery("from Patient where login=:login")
+                    .setParameter("login", login).getSingleResult();
+            PatientPanel patientPanel = new PatientPanel(patient, true);
+            createWindow(event, "/patientPanel", "Patient Panel", patientPanel);
             session.close();
         }
         else{
@@ -114,5 +119,24 @@ public class EnterPanel {
         stage.show();
     }
 
+    private void createWindow(ActionEvent event, String panel, String title, PatientPanel patientPanel) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(panel + ".fxml"));
+        fxmlLoader.setController(patientPanel);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void createWindow(ActionEvent event, String panel, String title, DoctorPanel doctorPanel) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(panel + ".fxml"));
+        fxmlLoader.setController(doctorPanel);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

@@ -35,14 +35,15 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="14.0" layoutY="21.0" promptText="Surname" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="20.0" />
-                              <TextField layoutX="15.0" layoutY="68.0" promptText="Name" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="70.0" />
-                              <TextField layoutX="14.0" layoutY="125.0" promptText="Patronymic" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="120.0" />
-                              <DatePicker editable="false" layoutX="15.0" layoutY="160.0" promptText="Birth date" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="170.0" />
-                              <TextField layoutX="20.0" layoutY="227.0" promptText="Hame adress" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="220.0" />
-                              <TextField editable="false" layoutX="205.0" layoutY="20.0" promptText="Identity number" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="20.0" />
-                              <TextField editable="false" layoutX="205.0" layoutY="70.0" promptText="Doctors' name" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="70.0" />
-                              <Button layoutX="247.0" layoutY="121.0" mnemonicParsing="false" text="Save changes" />
+                              <TextField fx:id="surnameTextField" layoutX="14.0" layoutY="21.0" promptText="Surname" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="20.0" />
+                              <TextField fx:id="nameTextField" layoutX="15.0" layoutY="68.0" promptText="Name" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="70.0" />
+                              <TextField fx:id="patronymicTextField" layoutX="14.0" layoutY="125.0" promptText="Patronymic" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="120.0" />
+                              <DatePicker fx:id="birthdayDateField" editable="false" layoutX="15.0" layoutY="160.0" promptText="Birth date" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="170.0" />
+                              <TextField fx:id="homeTextField" layoutX="20.0" layoutY="227.0" promptText="Hame adress" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="220.0" />
+                              <TextField fx:id="idTextField" editable="false" layoutX="205.0" layoutY="20.0" promptText="Identity number" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="saveButton" layoutX="205.0" layoutY="70.0" mnemonicParsing="false" onAction="#save" text="Save changes" />
+                              <Button fx:id="cancelButton" layoutX="304.0" layoutY="70.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="80.0" text="Cancel" />
+                              <Button fx:id="changeUserButton" layoutX="260.0" layoutY="109.0" mnemonicParsing="false" onAction="#changeUser" text="Change user" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -51,12 +52,12 @@
                   <content>
                     <AnchorPane prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="600.0">
+                              <TableView fx:id="cardsTable" layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="600.0">
                                 <columns>
-                                  <TableColumn prefWidth="150.0" text="Identity number" />
-                                  <TableColumn prefWidth="150.0" text="Date of initial admission" />
-                                    <TableColumn prefWidth="150.0" text="DIagnosis" />
-                                    <TableColumn prefWidth="150.0" text="Date of invoice" />
+                                  <TableColumn fx:id="idColumn" prefWidth="150.0" text="Doctor" />
+                                  <TableColumn fx:id="initialDateColumn" prefWidth="150.0" text="Date of initial admission" />
+                                    <TableColumn fx:id="diagnosisColumn" prefWidth="150.0" text="DIagnosis" />
+                                    <TableColumn fx:id="invoiceDateColumn" prefWidth="150.0" text="Date of invoice" />
                                 </columns>
                               </TableView>
                            </children>
