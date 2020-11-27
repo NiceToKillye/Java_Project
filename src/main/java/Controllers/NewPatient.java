@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class NewPatient implements Initializable {
+    private final static String SURNAME_PATTERN = "[А-ЯЁ][а-яё]++(?:-[А-ЯЁ][а-яё]++)?";
+    private final static String NAME_PATTERN = "[А-ЯЁ][а-яё]++";
+    private final static String PATRONYMIC_PATTERN = "[А-ЯЁ][а-яё]++";
 
     StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure("hibernate.cfg.xml").build();
@@ -46,6 +49,8 @@ public class NewPatient implements Initializable {
     List<?> docLog;
     List<?> patLog;
 
+    boolean admin;
+
     @FXML private TextField surnameField;
     @FXML private TextField loginField;
     @FXML private TextField passwordField;
@@ -56,9 +61,9 @@ public class NewPatient implements Initializable {
     @FXML private ComboBox<Doctor> doctorMenu;
     @FXML private DatePicker initialDateField;
 
-    private final static String SURNAME_PATTERN = "[А-ЯЁ][а-яё]++(?:-[А-ЯЁ][а-яё]++)?";
-    private final static String NAME_PATTERN = "[А-ЯЁ][а-яё]++";
-    private final static String PATRONYMIC_PATTERN = "[А-ЯЁ][а-яё]++";
+    public NewPatient(boolean admin){
+        this.admin = admin;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,7 +96,13 @@ public class NewPatient implements Initializable {
     @FXML
     void cancel(ActionEvent event) throws IOException {
         session.close();
-        changeScene(event, "/receptionistPanel", "Receptionist Panel");
+        if(!admin) {
+            changeScene(event, "/receptionistPanel", "Receptionist Panel");
+        }
+        else{
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML
@@ -125,9 +136,11 @@ public class NewPatient implements Initializable {
         }
 
         String docFIO = doc.getSurname() + " " + doc.getName() + " " + doc.getPatronymic();
-        PatientCard card = new PatientCard(doc.getId(), patient.getId(), initialDate, docFIO);
+        String patFIO = surname + " " + name + " " + patronymic;
+        PatientCard card = new PatientCard(doc.getId(), patient.getId(), initialDate, docFIO, patFIO);
         LinkedKey key = new LinkedKey(patient.getId(), doc.getId(), initialDate);
         card.setKey(key);
+
         try{
             session.beginTransaction();
             session.save(card);
@@ -139,7 +152,13 @@ public class NewPatient implements Initializable {
         }
 
         session.close();
-        changeScene(event, "/receptionistPanel", "Receptionist Panel");
+        if(!admin) {
+            changeScene(event, "/receptionistPanel", "Receptionist Panel");
+        }
+        else{
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
     }
 
     private Parent loadFXML(String fxml) throws IOException {

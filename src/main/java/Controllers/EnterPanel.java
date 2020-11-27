@@ -56,7 +56,6 @@ public class EnterPanel {
 
     @FXML
     void getIn(ActionEvent event) throws IOException {
-
         String login = loginField.getText();
         String password = passwordField.getText();
 
@@ -88,16 +87,16 @@ public class EnterPanel {
         }
         else if (password.equals(doctors.get(login))){
             System.out.println("Log in as Doctor:" + " Login" + login + " Password:" + password);
-            /*Doctor doctor = (Doctor) session.createQuery("from Doctor where login=:login")
+            Doctor doctor = (Doctor) session.createQuery("from Doctor where login=:login")
                     .setParameter("login", login).getSingleResult();
-            DoctorPanel doctorPanel = new DoctorPanel(patient, true);
-            createWindow(event, "/patientPanel", "Patient Panel", doctorPanel);*/
+            DoctorPanel doctorPanel = new DoctorPanel(doctor);
+            createWindow(event, "/doctorPanel", "Doctor Panel", doctorPanel);
         }
         else if (password.equals(patients.get(login))){
             System.out.println("Log in as Patients:" + " Login" + login + " Password:" + password);
             Patient patient = (Patient) session.createQuery("from Patient where login=:login")
                     .setParameter("login", login).getSingleResult();
-            PatientPanel patientPanel = new PatientPanel(patient, true);
+            PatientPanel patientPanel = new PatientPanel(patient, false, false);
             createWindow(event, "/patientPanel", "Patient Panel", patientPanel);
             session.close();
         }

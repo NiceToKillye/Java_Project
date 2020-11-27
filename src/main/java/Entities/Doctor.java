@@ -32,6 +32,22 @@ public class Doctor {
     )
     private List<Patient> patients;
 
+    public Doctor(){
+
+    }
+
+    public Doctor(String surname, String name, String patronymic,
+                  Speciality speciality, LocalDate hiringDate,
+                  String login, String password) {
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.speciality = speciality;
+        this.hiringDate = hiringDate;
+        this.login = login;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }

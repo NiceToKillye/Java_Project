@@ -2,6 +2,7 @@ package Controllers;
 
 import Entities.Doctor;
 import Entities.LinkedKey;
+import Entities.Patient;
 import Entities.PatientCard;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +35,7 @@ public class NewCard implements Initializable {
             .getMetadataBuilder().build();
     SessionFactory sessionFactory = metadata
             .getSessionFactoryBuilder().build();
-    Session session = sessionFactory.openSession();
+    Session session;
     ObservableList<Doctor> doctors;
 
     @FXML
@@ -44,16 +45,19 @@ public class NewCard implements Initializable {
     private ComboBox<Doctor> doctorMenu;
 
 
-    int id;
+    private final Patient patient;
 
-    public NewCard(int id){
-        this.id = id;
+    public NewCard(Patient patient){
+        this.patient = patient;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        session = sessionFactory.openSession();
         doctors = FXCollections.observableArrayList(
                 session.createQuery("from Doctor", Doctor.class).getResultList());
+        session.close();
+
         doctorMenu.setItems(doctors);
         doctorMenu.getSelectionModel().selectFirst();
 
@@ -81,7 +85,6 @@ public class NewCard implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
-        session.close();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -98,9 +101,11 @@ public class NewCard implements Initializable {
             initialDateField.setStyle("-fx-control-inner-background: white;");
         }
         String docFIO = doc.getSurname() + " " + doc.getName() + " " + doc.getPatronymic();
-        PatientCard card = new PatientCard(doc.getId(), id,initialDate, docFIO);
-        LinkedKey key = new LinkedKey(id, doc.getId(), initialDate);
+        String patFIO = patient.getSurname() + " " + patient.getName() + " " + patient.getPatronymic();
+        PatientCard card = new PatientCard(doc.getId(), patient.getId(),initialDate, docFIO, patFIO);
+        LinkedKey key = new LinkedKey(patient.getId(), doc.getId(), initialDate);
         card.setKey(key);
+        session = sessionFactory.openSession();
         try{
             session.beginTransaction();
             session.save(card);

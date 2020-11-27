@@ -30,15 +30,19 @@ public class PatientCard implements Serializable {
     @Column(name = "doctor_FIO")
     private String docFIO;
 
+    @Column(name = "patient_FIO")
+    private String patFIO;
+
     private PatientCard(){
 
     }
 
-    public PatientCard(int doctorId, int patientId, LocalDate initialDate, String docFIO) {
+    public PatientCard(int doctorId, int patientId, LocalDate initialDate, String docFIO, String patFIO) {
         this.doctorId = doctorId;
         this.patientId = patientId;
         this.initialDate = initialDate;
         this.docFIO = docFIO;
+        this.patFIO = patFIO;
     }
 
     public LinkedKey getKey() {
@@ -95,5 +99,13 @@ public class PatientCard implements Serializable {
 
     public void setDocFIO(String docFIO) {
         this.docFIO = docFIO;
+    }
+
+    public String getPatFIO() {
+        return patFIO;
+    }
+
+    public void setPatFIO(String patFIO) {
+        this.patFIO = patFIO;
     }
 }

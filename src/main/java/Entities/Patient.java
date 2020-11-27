@@ -1,5 +1,7 @@
 package Entities;
 
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -22,6 +24,8 @@ public class Patient {
     private String surname;
     private String name;
     private String patronymic;
+
+
 
     public Patient(String login, String password, String surname, String name,
                    String patronymic, LocalDate birthdayDate, String homeAddress) {

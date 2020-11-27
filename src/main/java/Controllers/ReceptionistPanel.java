@@ -35,12 +35,11 @@ public class ReceptionistPanel implements Initializable {
             .getMetadataBuilder().build();
     SessionFactory sessionFactory = metadata
             .getSessionFactoryBuilder().build();
-    Session session = sessionFactory.openSession();
+    Session session;
 
-    private ObservableList<Patient> patients = FXCollections.observableArrayList(
-            session.createQuery("from Patient", Patient.class).getResultList());
-    FilteredList<Patient> filteredPatient = new FilteredList<>(patients, b -> true);
-    SortedList<Patient> sortedPatient = new SortedList<>(filteredPatient);
+    private ObservableList<Patient> patients;
+    FilteredList<Patient> filteredPatient;
+    SortedList<Patient> sortedPatient;
 
     @FXML private TableView<Patient> table;
     @FXML private TableColumn<Patient, String> surnameColumn;
@@ -55,11 +54,17 @@ public class ReceptionistPanel implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        session = sessionFactory.openSession();
+        patients = FXCollections.observableArrayList(
+                session.createQuery("from Patient", Patient.class).getResultList());
+        session.close();
+        filteredPatient = new FilteredList<>(patients, b -> true);
+        sortedPatient = new SortedList<>(filteredPatient);
+
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         patronymicColumn.setCellValueFactory(new PropertyValueFactory<>("patronymic"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-
         table.setItems(patients);
 
         table.setRowFactory(tv -> {
@@ -67,7 +72,7 @@ public class ReceptionistPanel implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Patient rowData = row.getItem();
-                    PatientPanel patientPanel = new PatientPanel(rowData, false);
+                    PatientPanel patientPanel = new PatientPanel(rowData, true, false);
                     try {
                         createWindow(patientPanel);
                     } catch (IOException e) {
@@ -76,6 +81,7 @@ public class ReceptionistPanel implements Initializable {
                     System.out.println("Double click on: " + rowData.getName());
                 }
             });
+            table.refresh();
             return row;
         });
 
@@ -99,38 +105,38 @@ public class ReceptionistPanel implements Initializable {
 
     @FXML
     void addNewPatient(ActionEvent event) throws IOException {
-        session.close();
-        changeScene(event, "/newPatientPanel", "New Patient");
+        createWindow(new NewPatient(false));
     }
 
     @FXML
     void appointment(ActionEvent event) throws IOException {
         Patient apPatient = table.getSelectionModel().getSelectedItem();
-        createWindow(new NewCard(apPatient.getId()));
+        createWindow(new NewCard(apPatient));
     }
 
     @FXML
     void changeUser(ActionEvent event) throws IOException {
-        session.close();
         changeScene(event, "/enterPanel", "Enter Panel");
     }
 
     @FXML
     void discharge(ActionEvent event) {
         Patient remPatient = table.getSelectionModel().getSelectedItem();
+        session = sessionFactory.openSession();
         List<?> cards = session.createQuery("from PatientCard where patient_id=:patient_id")
                             .setParameter("patient_id", remPatient.getId()).getResultList();
-        cards.forEach(card -> {
-            try {
-                session.beginTransaction();
-                session.delete(card);
-                session.getTransaction().commit();
-            }
-            catch (Exception ex){
-                session.getTransaction().rollback();
-                System.out.println("The transaction was not completed");
-            }
-        });
+        if(!cards.isEmpty()) {
+            cards.forEach(card -> {
+                try {
+                    session.beginTransaction();
+                    session.delete(card);
+                    session.getTransaction().commit();
+                } catch (Exception ex) {
+                    session.getTransaction().rollback();
+                    System.out.println("The transaction was not completed");
+                }
+            });
+        }
         patients.removeAll(remPatient);
         try {
             session.beginTransaction();
@@ -141,14 +147,27 @@ public class ReceptionistPanel implements Initializable {
             session.getTransaction().rollback();
             System.out.println("The transaction was not completed");
         }
+        session.close();
     }
 
     @FXML
     void refresh(ActionEvent event) {
+        session = sessionFactory.openSession();
         patients = FXCollections.observableArrayList(
                 session.createQuery("from Patient", Patient.class).getResultList());
         table.setItems(patients);
         activateSearch();
+        session.close();
+    }
+
+    private void createWindow(NewPatient newPatient) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/newPatientPanel" + ".fxml"));
+        fxmlLoader.setController(newPatient);
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle("New Patient");
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void createWindow(PatientPanel patientPanel) throws IOException {
@@ -189,5 +208,6 @@ public class ReceptionistPanel implements Initializable {
         sortedPatient = new SortedList<>(filteredPatient);
         sortedPatient.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedPatient);
+        table.refresh();
     }
 }

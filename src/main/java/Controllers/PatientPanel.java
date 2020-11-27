@@ -33,7 +33,8 @@ public class PatientPanel implements Initializable {
     private final static String PATRONYMIC_PATTERN = "[А-ЯЁ][а-яё]++";
 
     Patient patient;
-    boolean activate;
+    boolean receptionist;
+    boolean admin;
 
     StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure("hibernate.cfg.xml").build();
@@ -45,57 +46,30 @@ public class PatientPanel implements Initializable {
 
     ObservableList<PatientCard> cards;
 
-    public PatientPanel(Patient patient, boolean activate){
+    public PatientPanel(Patient patient, boolean receptionist, boolean admin){
         this.patient = patient;
-        this.activate = activate;
+        this.receptionist = receptionist;
+        this.admin = admin;
     }
 
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button changeUserButton;
-
-    @FXML
-    private TextField surnameTextField;
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private TextField patronymicTextField;
-
-    @FXML
-    private DatePicker birthdayDateField;
-
-    @FXML
-    private TextField homeTextField;
-
-    @FXML
-    private TextField idTextField;
-
-    @FXML
-    private TableView<PatientCard> cardsTable;
-
-    @FXML
-    private TableColumn<PatientCard, String> idColumn;
-
-    @FXML
-    private TableColumn<PatientCard, LocalDate> initialDateColumn;
-
-    @FXML
-    private TableColumn<PatientCard, String> diagnosisColumn;
-
-    @FXML
-    private TableColumn<PatientCard, LocalDate> invoiceDateColumn;
-
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
+    @FXML private Button changeUserButton;
+    @FXML private TextField surnameTextField;
+    @FXML private TextField nameTextField;
+    @FXML private TextField patronymicTextField;
+    @FXML private DatePicker birthdayDateField;
+    @FXML private TextField homeTextField;
+    @FXML private TextField idTextField;
+    @FXML private TableView<PatientCard> cardsTable;
+    @FXML private TableColumn<PatientCard, String> idColumn;
+    @FXML private TableColumn<PatientCard, LocalDate> initialDateColumn;
+    @FXML private TableColumn<PatientCard, String> diagnosisColumn;
+    @FXML private TableColumn<PatientCard, LocalDate> invoiceDateColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(!activate){
+        if(receptionist || admin){
             changeUserButton.setDisable(true);
             changeUserButton.setVisible(false);
         }
@@ -128,7 +102,13 @@ public class PatientPanel implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     PatientCard rowData = row.getItem();
-                    Card cardPanel = new Card(rowData);
+                    Card cardPanel;
+                    if(admin){
+                        cardPanel = new Card(rowData, true);
+                    }
+                    else {
+                        cardPanel = new Card(rowData, false);
+                    }
                     try {
                         createWindow(cardPanel);
                     } catch (IOException e) {
@@ -143,7 +123,7 @@ public class PatientPanel implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
-        if(!activate){
+        if(receptionist || admin){
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }
@@ -165,7 +145,6 @@ public class PatientPanel implements Initializable {
 
     @FXML
     void save(ActionEvent event) {
-
         String surname = surnameTextField.getText();
         String name = nameTextField.getText();
         String patronymic = patronymicTextField.getText();
@@ -193,7 +172,8 @@ public class PatientPanel implements Initializable {
             System.out.println("The transaction was not completed");
         }
 
-        if(!activate){
+        if(receptionist || admin){
+            session.close();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }
