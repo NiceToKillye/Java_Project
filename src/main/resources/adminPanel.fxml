@@ -17,22 +17,22 @@
          <children>
             <TabPane layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="940.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab onSelectionChanged="#recTabOpen" text="Receptionists">
+                <Tab onSelectionChanged="#recTabOpen" text="Регистраторы">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TableView fx:id="recTable" layoutX="10.0" layoutY="45.0" prefHeight="370.0" prefWidth="920.0">
                                 <columns>
-                                    <TableColumn fx:id="recSurnameColumn" minWidth="230.0" prefWidth="230.0" text="Surname" />
-                                    <TableColumn fx:id="recNameColumn" minWidth="230.0" prefWidth="230.0" text="Name" />
-                                  <TableColumn fx:id="recLoginColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Login" />
-                                  <TableColumn fx:id="recPasswordColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Password" />
+                                    <TableColumn fx:id="recSurnameColumn" minWidth="230.0" prefWidth="230.0" text="Фамилия" />
+                                    <TableColumn fx:id="recNameColumn" minWidth="230.0" prefWidth="230.0" text="Имя" />
+                                  <TableColumn fx:id="recLoginColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Логин" />
+                                  <TableColumn fx:id="recPasswordColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Пароль" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="383.0" layoutY="420.0" mnemonicParsing="false" onAction="#dismissRec" prefHeight="30.0" prefWidth="80.0" text="Dismiss" />
-                              <Button layoutX="478.0" layoutY="420.0" mnemonicParsing="false" onAction="#employRec" prefHeight="30.0" prefWidth="80.0" text="Employ" />
-                              <TextField fx:id="recSearchField" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="105.0" text="Search field">
+                              <Button layoutX="383.0" layoutY="420.0" mnemonicParsing="false" onAction="#dismissRec" prefHeight="30.0" prefWidth="80.0" text="Уволить" />
+                              <Button layoutX="478.0" layoutY="420.0" mnemonicParsing="false" onAction="#employRec" prefHeight="30.0" prefWidth="80.0" text="Нанять" />
+                              <TextField fx:id="recSearchField" layoutX="70.0" layoutY="11.0" prefHeight="30.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="60.0" text="Поиск">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -42,63 +42,63 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab onSelectionChanged="#docTabOpen" text="Doctors">
+                <Tab onSelectionChanged="#docTabOpen" text="Доктора">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="830.0">
                            <children>
                               <TableView fx:id="docTable" layoutX="10.0" layoutY="45.0" prefHeight="370.0" prefWidth="920.0">
                                 <columns>
-                                  <TableColumn fx:id="docSurnameColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Surname" />
-                                  <TableColumn fx:id="docNameColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Name" />
-                                    <TableColumn fx:id="docPatronymicColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Patronymic" />
-                                    <TableColumn fx:id="docSpecialityColumn" editable="false" minWidth="137.0" prefWidth="137.0" text="Speciality" />
-                                    <TableColumn fx:id="docEmpDateColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Date" />
-                                    <TableColumn fx:id="docLoginColumn" minWidth="130.0" prefWidth="130.0" text="Login" />
-                                    <TableColumn fx:id="docPasswordColumn" minWidth="130.0" prefWidth="130.0" text="Password" />
+                                  <TableColumn fx:id="docSurnameColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Фамилия" />
+                                  <TableColumn fx:id="docNameColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Имя" />
+                                    <TableColumn fx:id="docPatronymicColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Отчество" />
+                                    <TableColumn fx:id="docSpecialityColumn" editable="false" minWidth="137.0" prefWidth="137.0" text="Специальность" />
+                                    <TableColumn fx:id="docEmpDateColumn" editable="false" minWidth="130.0" prefWidth="130.0" text="Дата найма" />
+                                    <TableColumn fx:id="docLoginColumn" minWidth="130.0" prefWidth="130.0" text="Логин" />
+                                    <TableColumn fx:id="docPasswordColumn" minWidth="130.0" prefWidth="130.0" text="Пароль" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="383.0" layoutY="420.0" mnemonicParsing="false" onAction="#dismissDoc" prefHeight="30.0" prefWidth="80.0" text="Dismiss" />
-                              <Button layoutX="478.0" layoutY="420.0" mnemonicParsing="false" onAction="#employDoc" prefHeight="30.0" prefWidth="80.0" text="Employ" />
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="105.0" text="Search field">
+                              <Button layoutX="383.0" layoutY="420.0" mnemonicParsing="false" onAction="#dismissDoc" prefHeight="30.0" prefWidth="80.0" text="Уволить" />
+                              <Button layoutX="478.0" layoutY="420.0" mnemonicParsing="false" onAction="#employDoc" prefHeight="30.0" prefWidth="80.0" text="Нанять" />
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="60.0" text="Поиск">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="docSearchField" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" />
-                              <Button layoutX="823.0" layoutY="12.0" mnemonicParsing="false" onAction="#docRefresh" prefHeight="27.0" prefWidth="107.0" text="Refresh" />
+                              <TextField fx:id="docSearchField" layoutX="70.0" layoutY="11.0" prefHeight="30.0" prefWidth="300.0" />
+                              <Button layoutX="823.0" layoutY="12.0" mnemonicParsing="false" onAction="#docRefresh" prefHeight="27.0" prefWidth="107.0" text="Обновить" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab onSelectionChanged="#patTabOpen" text="Patient">
+                  <Tab onSelectionChanged="#patTabOpen" text="Пациенты">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="940.0">
                            <children>
                               <TableView fx:id="patTable" layoutX="10.0" layoutY="45.0" prefHeight="370.0" prefWidth="920.0">
                                  <columns>
-                                    <TableColumn fx:id="patSurnameColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Surname" />
-                                    <TableColumn fx:id="patNameColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Name" />
-                                    <TableColumn fx:id="patPatronymicColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Patronymic" />
-                                    <TableColumn fx:id="patIdColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Identify number" />
+                                    <TableColumn fx:id="patSurnameColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Фамилия" />
+                                    <TableColumn fx:id="patNameColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Имя" />
+                                    <TableColumn fx:id="patPatronymicColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Отчество" />
+                                    <TableColumn fx:id="patIdColumn" editable="false" minWidth="230.0" prefWidth="230.0" text="Идентификационный номер" />
                                  </columns>
                               </TableView>
-                              <Button layoutX="320.0" layoutY="421.0" mnemonicParsing="false" onAction="#addNewPat" prefHeight="30.0" prefWidth="95.0" text="Add" />
-                              <Button layoutX="422.0" layoutY="421.0" mnemonicParsing="false" onAction="#deletePat" prefHeight="30.0" prefWidth="95.0" text="Delete" />
-                              <TextField fx:id="patSearchField" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" />
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="105.0" text="Search field">
+                              <Button layoutX="320.0" layoutY="421.0" mnemonicParsing="false" onAction="#addNewPat" prefHeight="30.0" prefWidth="95.0" text="Добавить" />
+                              <Button layoutX="422.0" layoutY="421.0" mnemonicParsing="false" onAction="#deletePat" prefHeight="30.0" prefWidth="95.0" text="Удалить" />
+                              <TextField fx:id="patSearchField" layoutX="70.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" />
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="60.0" text="Поиск">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="525.0" layoutY="421.0" mnemonicParsing="false" onAction="#detailsPat" prefHeight="30.0" prefWidth="95.0" text="Details" />
-                              <Button layoutX="823.0" layoutY="12.0" mnemonicParsing="false" onAction="#patRefresh" prefHeight="27.0" prefWidth="107.0" text="Refresh" />
+                              <Button layoutX="525.0" layoutY="421.0" mnemonicParsing="false" onAction="#detailsPat" prefHeight="30.0" prefWidth="95.0" text="Детали" />
+                              <Button layoutX="823.0" layoutY="12.0" mnemonicParsing="false" onAction="#patRefresh" prefHeight="27.0" prefWidth="107.0" text="Обновить" />
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
               </tabs>
             </TabPane>
-            <Button layoutX="436.0" layoutY="499.0" mnemonicParsing="false" onAction="#changeUser" text="Change user" />
+            <Button layoutX="405.0" layoutY="497.0" mnemonicParsing="false" onAction="#changeUser" text="Сменить пользователя" />
          </children>
     </AnchorPane>
   </children>

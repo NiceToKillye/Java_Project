@@ -38,12 +38,8 @@ public class NewCard implements Initializable {
     Session session;
     ObservableList<Doctor> doctors;
 
-    @FXML
-    private DatePicker initialDateField;
-
-    @FXML
-    private ComboBox<Doctor> doctorMenu;
-
+    @FXML private DatePicker initialDateField;
+    @FXML private ComboBox<Doctor> doctorMenu;
 
     private final Patient patient;
 
@@ -77,11 +73,9 @@ public class NewCard implements Initializable {
                 };
             }
         };
-
         doctorMenu.setButtonCell(cellCallback.call(null));
         doctorMenu.setCellFactory(cellCallback);
     }
-
 
     @FXML
     void cancel(ActionEvent event) {

@@ -41,15 +41,7 @@ public class NewPatient implements Initializable {
             .getMetadataBuilder().build();
     SessionFactory sessionFactory = metadata
             .getSessionFactoryBuilder().build();
-    Session session = sessionFactory.openSession();
-    ObservableList<Doctor> doctors;
-
-    List<?> admLog;
-    List<?> recLog;
-    List<?> docLog;
-    List<?> patLog;
-
-    boolean admin;
+    Session session;
 
     @FXML private TextField surnameField;
     @FXML private TextField loginField;
@@ -61,14 +53,23 @@ public class NewPatient implements Initializable {
     @FXML private ComboBox<Doctor> doctorMenu;
     @FXML private DatePicker initialDateField;
 
+    boolean admin;
+    List<?> admLog;
+    List<?> recLog;
+    List<?> docLog;
+    List<?> patLog;
+    ObservableList<Doctor> doctors;
+
     public NewPatient(boolean admin){
         this.admin = admin;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        session = sessionFactory.openSession();
         doctors = FXCollections.observableArrayList(
                 session.createQuery("from Doctor", Doctor.class).getResultList());
+        session.close();
         doctorMenu.setItems(doctors);
         doctorMenu.getSelectionModel().selectFirst();
 
@@ -88,14 +89,12 @@ public class NewPatient implements Initializable {
                 };
             }
         };
-
         doctorMenu.setButtonCell(cellCallback.call(null));
         doctorMenu.setCellFactory(cellCallback);
     }
 
     @FXML
     void cancel(ActionEvent event) throws IOException {
-        session.close();
         if(!admin) {
             changeScene(event, "/receptionistPanel", "Receptionist Panel");
         }
@@ -125,6 +124,7 @@ public class NewPatient implements Initializable {
         }
 
         Patient patient = new Patient(login, password, surname, name, patronymic, birthday, homeAddress);
+        session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.save(patient);
@@ -150,15 +150,10 @@ public class NewPatient implements Initializable {
             session.getTransaction().rollback();
             System.out.println("The transaction was not completed");
         }
-
         session.close();
-        if(!admin) {
-            changeScene(event, "/receptionistPanel", "Receptionist Panel");
-        }
-        else{
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-        }
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     private Parent loadFXML(String fxml) throws IOException {
@@ -180,6 +175,7 @@ public class NewPatient implements Initializable {
 
         boolean correct = true;
 
+        session = sessionFactory.openSession();
         try {
             admLog = session.createSQLQuery("select login from Admins").list();
             recLog = session.createSQLQuery("select login from Receptionists").list();
@@ -189,6 +185,7 @@ public class NewPatient implements Initializable {
         catch (Exception ex){
             ex.printStackTrace();
         }
+        session.close();
 
         if(!surname.matches(SURNAME_PATTERN) || surname.isEmpty()){
             surnameField.setStyle("-fx-control-inner-background: red;");

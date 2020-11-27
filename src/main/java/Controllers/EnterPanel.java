@@ -25,10 +25,6 @@ import java.util.stream.Collectors;
 
 public class EnterPanel {
 
-    public EnterPanel(){
-
-    }
-
     StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure("hibernate.cfg.xml").build();
     Metadata metadata = new MetadataSources(registry)
@@ -37,22 +33,19 @@ public class EnterPanel {
             .getSessionFactoryBuilder().build();
     Session session = sessionFactory.openSession();
 
+    @FXML private PasswordField passwordField;
+    @FXML private TextField loginField;
+    @FXML private Button getInButton;
+    @FXML private Label warning;
+
     Map<String, String> admins;
     Map<String, String> receptionists;
     Map<String, String> doctors;
     Map<String, String> patients;
 
-    @FXML
-    private PasswordField passwordField;
+    public EnterPanel(){
 
-    @FXML
-    private TextField loginField;
-
-    @FXML
-    private Button getInButton;
-
-    @FXML
-    private Label warning;
+    }
 
     @FXML
     void getIn(ActionEvent event) throws IOException {
@@ -137,5 +130,4 @@ public class EnterPanel {
         stage.setScene(scene);
         stage.show();
     }
-
 }

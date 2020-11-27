@@ -29,6 +29,13 @@ public class Card implements Initializable {
             .getSessionFactoryBuilder().build();
     Session session;
 
+    @FXML private TextField idTextField;
+    @FXML private TextField diagnosisField;
+    @FXML private DatePicker initialDateField;
+    @FXML private DatePicker invoiceDateField;
+    @FXML private Button saveButton;
+    @FXML private Button revertButton;
+
     private final PatientCard card;
     private final boolean doctor;
 
@@ -36,13 +43,6 @@ public class Card implements Initializable {
         this.card = card;
         this.doctor = doctor;
     }
-
-    @FXML private TextField idTextField;
-    @FXML private TextField diagnosisField;
-    @FXML private DatePicker initialDateField;
-    @FXML private DatePicker invoiceDateField;
-    @FXML private Button saveButton;
-    @FXML private Button revertButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,9 +75,10 @@ public class Card implements Initializable {
 
     @FXML
     void saveChanges(ActionEvent event) {
-        session = sessionFactory.openSession();
         card.setDiagnosis(diagnosisField.getText());
         card.setInvoiceDate(invoiceDateField.getValue());
+
+        session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(card);
@@ -88,6 +89,7 @@ public class Card implements Initializable {
             System.out.println("The transaction was not completed");
         }
         session.close();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }

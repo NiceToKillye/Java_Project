@@ -37,10 +37,6 @@ public class ReceptionistPanel implements Initializable {
             .getSessionFactoryBuilder().build();
     Session session;
 
-    private ObservableList<Patient> patients;
-    FilteredList<Patient> filteredPatient;
-    SortedList<Patient> sortedPatient;
-
     @FXML private TableView<Patient> table;
     @FXML private TableColumn<Patient, String> surnameColumn;
     @FXML private TableColumn<Patient, String> nameColumn;
@@ -51,9 +47,12 @@ public class ReceptionistPanel implements Initializable {
     @FXML private Button newPatButton;
     @FXML private TextField searchField;
 
+    private ObservableList<Patient> patients;
+    FilteredList<Patient> filteredPatient;
+    SortedList<Patient> sortedPatient;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         session = sessionFactory.openSession();
         patients = FXCollections.observableArrayList(
                 session.createQuery("from Patient", Patient.class).getResultList());

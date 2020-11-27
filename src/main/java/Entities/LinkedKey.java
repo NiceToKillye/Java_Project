@@ -1,12 +1,20 @@
 package Entities;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class LinkedKey implements Serializable {
+    @Column(name = "doctor_id")
+    private int doctorId;
+
+    @Column(name = "patient_id")
+    private int patientId;
+
+    @Column(name = "initial_date")
+    private LocalDate initialDate;
+
     public LinkedKey(){
 
     }
@@ -16,15 +24,6 @@ public class LinkedKey implements Serializable {
         this.doctorId = doctorId;
         this.initialDate = initialDate;
     }
-
-    @Column(name = "doctor_id")
-    private int doctorId;
-
-    @Column(name = "patient_id")
-    private int patientId;
-
-    @Column(name = "initial_date")
-    private LocalDate initialDate;
 
     public int getDoctorId() {
         return doctorId;

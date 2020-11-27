@@ -11,11 +11,9 @@ public class PatientCard implements Serializable {
     @EmbeddedId
     LinkedKey key;
 
-    //@Id
     @Column(name = "doctor_id", insertable = false, updatable = false)
     private int doctorId;
 
-    //@Id
     @Column(name = "patient_id", insertable = false, updatable = false)
     private int patientId;
 

@@ -37,19 +37,19 @@ public class DoctorPanel implements Initializable {
             .getSessionFactoryBuilder().build();
     Session session;
 
-    Doctor doctor;
-    ObservableList<PatientCard> cards;
-
-    public DoctorPanel(Doctor doctor){
-        this.doctor = doctor;
-    }
-
     @FXML private TableView<PatientCard> table;
     @FXML private TableColumn<PatientCard, String> patientFioColumn;
     @FXML private TableColumn<PatientCard, LocalDate> initialDateColumn;
     @FXML private TableColumn<PatientCard, LocalDate> invoiceDateColumn;
     @FXML private TableColumn<PatientCard, Integer> idColumn;
     @FXML private TableColumn<PatientPanel, Integer> docIdColumn;
+
+    Doctor doctor;
+    ObservableList<PatientCard> cards;
+
+    public DoctorPanel(Doctor doctor){
+        this.doctor = doctor;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,6 +84,7 @@ public class DoctorPanel implements Initializable {
         cards.removeAll(card);
         table.refresh();
     }
+
     private void createWindow(Card card) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/card" + ".fxml"));
         fxmlLoader.setController(card);
@@ -106,5 +107,4 @@ public class DoctorPanel implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
 }

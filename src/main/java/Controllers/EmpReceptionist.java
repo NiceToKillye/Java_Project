@@ -30,15 +30,15 @@ public class EmpReceptionist implements Initializable {
             .getSessionFactoryBuilder().build();
     Session session;
 
-    List<?> admLog;
-    List<?> recLog;
-    List<?> docLog;
-    List<?> patLog;
-
     @FXML private TextField surnameTextField;
     @FXML private TextField nameTextField;
     @FXML private TextField loginTextField;
     @FXML private TextField passwordTextField;
+
+    List<?> admLog;
+    List<?> recLog;
+    List<?> docLog;
+    List<?> patLog;
 
     public EmpReceptionist(){
 

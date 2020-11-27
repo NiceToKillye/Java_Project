@@ -15,15 +15,15 @@ public class Receptionist {
     private String surname;
     private String name;
 
+    public Receptionist(){
+
+    }
+
     public Receptionist(String surname, String name, String login, String password) {
         this.surname = surname;
         this.name = name;
         this.login = login;
         this.password = password;
-    }
-
-    public Receptionist(){
-
     }
 
     public int getId() {

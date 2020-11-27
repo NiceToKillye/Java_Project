@@ -27,14 +27,9 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class PatientPanel implements Initializable {
-
     private final static String SURNAME_PATTERN = "[А-ЯЁ][а-яё]++(?:-[А-ЯЁ][а-яё]++)?";
     private final static String NAME_PATTERN = "[А-ЯЁ][а-яё]++";
     private final static String PATRONYMIC_PATTERN = "[А-ЯЁ][а-яё]++";
-
-    Patient patient;
-    boolean receptionist;
-    boolean admin;
 
     StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure("hibernate.cfg.xml").build();
@@ -42,8 +37,28 @@ public class PatientPanel implements Initializable {
             .getMetadataBuilder().build();
     SessionFactory sessionFactory = metadata
             .getSessionFactoryBuilder().build();
-    Session session = sessionFactory.openSession();
+    Session session;
 
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
+    @FXML private Button changeUserButton;
+
+    @FXML private TextField surnameTextField;
+    @FXML private TextField nameTextField;
+    @FXML private TextField patronymicTextField;
+    @FXML private DatePicker birthdayDateField;
+    @FXML private TextField homeTextField;
+    @FXML private TextField idTextField;
+
+    @FXML private TableView<PatientCard> cardsTable;
+    @FXML private TableColumn<PatientCard, String> idColumn;
+    @FXML private TableColumn<PatientCard, LocalDate> initialDateColumn;
+    @FXML private TableColumn<PatientCard, String> diagnosisColumn;
+    @FXML private TableColumn<PatientCard, LocalDate> invoiceDateColumn;
+
+    Patient patient;
+    boolean receptionist;
+    boolean admin;
     ObservableList<PatientCard> cards;
 
     public PatientPanel(Patient patient, boolean receptionist, boolean admin){
@@ -52,21 +67,6 @@ public class PatientPanel implements Initializable {
         this.admin = admin;
     }
 
-    @FXML private Button saveButton;
-    @FXML private Button cancelButton;
-    @FXML private Button changeUserButton;
-    @FXML private TextField surnameTextField;
-    @FXML private TextField nameTextField;
-    @FXML private TextField patronymicTextField;
-    @FXML private DatePicker birthdayDateField;
-    @FXML private TextField homeTextField;
-    @FXML private TextField idTextField;
-    @FXML private TableView<PatientCard> cardsTable;
-    @FXML private TableColumn<PatientCard, String> idColumn;
-    @FXML private TableColumn<PatientCard, LocalDate> initialDateColumn;
-    @FXML private TableColumn<PatientCard, String> diagnosisColumn;
-    @FXML private TableColumn<PatientCard, LocalDate> invoiceDateColumn;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(receptionist || admin){
@@ -74,14 +74,17 @@ public class PatientPanel implements Initializable {
             changeUserButton.setVisible(false);
         }
 
+        session = sessionFactory.openSession();
         try {
             cards = FXCollections.observableArrayList(
                     session.createQuery("from PatientCard where patient_id=:patient_id")
-                            .setParameter("patient_id", patient.getId()).getResultList());
+                            .setParameter("patient_id", patient.getId()).getResultList()
+            );
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
+        session.close();
 
         surnameTextField.setText(patient.getSurname());
         nameTextField.setText(patient.getName());
@@ -94,7 +97,6 @@ public class PatientPanel implements Initializable {
         initialDateColumn.setCellValueFactory(new PropertyValueFactory<>("initialDate"));
         diagnosisColumn.setCellValueFactory(new PropertyValueFactory<>("diagnosis"));
         invoiceDateColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceDate"));
-
         cardsTable.setItems(cards);
 
         cardsTable.setRowFactory(tv -> {
@@ -162,6 +164,7 @@ public class PatientPanel implements Initializable {
         patient.setBirthdayDate(birthday);
         patient.setHomeAddress(homeAddress);
 
+        session = sessionFactory.openSession();
         try {
             session.beginTransaction();
             session.saveOrUpdate(patient);
@@ -171,9 +174,9 @@ public class PatientPanel implements Initializable {
             session.getTransaction().rollback();
             System.out.println("The transaction was not completed");
         }
+        session.close();
 
         if(receptionist || admin){
-            session.close();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
         }

@@ -36,11 +36,6 @@ public class EmpDoctor implements Initializable {
             .getSessionFactoryBuilder().build();
     Session session;
 
-    List<?> admLog;
-    List<?> recLog;
-    List<?> docLog;
-    List<?> patLog;
-
     @FXML private TextField surnameTextField;
     @FXML private TextField nameTextField;
     @FXML private TextField patronymicTextField;
@@ -48,7 +43,12 @@ public class EmpDoctor implements Initializable {
     @FXML private ComboBox<Speciality> specialityBox;
     @FXML private TextField loginTextField;
     @FXML private TextField passwordTextField;
+
     private final ObservableList<Speciality> specialities = FXCollections.observableArrayList(Speciality.values());
+    List<?> admLog;
+    List<?> recLog;
+    List<?> docLog;
+    List<?> patLog;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,6 +71,7 @@ public class EmpDoctor implements Initializable {
                 };
             }
         };
+
         specialityBox.setButtonCell(cellCallback.call(null));
         specialityBox.setCellFactory(cellCallback);
     }
@@ -94,6 +95,7 @@ public class EmpDoctor implements Initializable {
         if(!check(surname, name, patronymic, hiringDate, login, password)){
             return;
         }
+
         Doctor doctor = new Doctor(surname, name, patronymic, speciality, hiringDate, login, password);
         session = sessionFactory.openSession();
         try {
@@ -106,6 +108,7 @@ public class EmpDoctor implements Initializable {
             System.out.println("The transaction was not completed");
         }
         session.close();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -114,6 +117,7 @@ public class EmpDoctor implements Initializable {
                           LocalDate hiringDate,
                           String login, String password){
         boolean correct = true;
+
         session = sessionFactory.openSession();
         try {
             admLog = session.createSQLQuery("select login from Admins").list();
