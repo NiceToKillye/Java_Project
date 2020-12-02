@@ -12,26 +12,26 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="14.0" layoutY="88.0" prefHeight="17.0" prefWidth="78.0" text="Name" />
-            <Label layoutX="14.0" layoutY="191.0" prefHeight="17.0" prefWidth="78.0" text="Birth date" />
-            <Label layoutX="14.0" layoutY="136.0" prefHeight="17.0" prefWidth="78.0" text="Patronymic" />
-            <Label layoutX="14.0" layoutY="244.0" prefHeight="17.0" prefWidth="78.0" text="Home adress" />
-            <Label layoutX="14.0" layoutY="41.0" prefHeight="17.0" prefWidth="78.0" text="Surname" />
-            <Label layoutX="300.0" layoutY="137.0" prefHeight="17.0" prefWidth="78.0" text="Login" />
-            <Label layoutX="301.0" layoutY="191.0" prefHeight="17.0" prefWidth="78.0" text="Password" />
-            <TextField fx:id="surnameField" layoutX="108.0" layoutY="36.0" />
-            <TextField fx:id="loginField" layoutX="403.0" layoutY="131.0" />
-            <TextField fx:id="passwordField" layoutX="403.0" layoutY="186.0" />
-            <TextField fx:id="homeAddressField" layoutX="108.0" layoutY="239.0" />
-            <TextField fx:id="nameField" layoutX="108.0" layoutY="83.0" />
-            <TextField fx:id="patronymicField" layoutX="108.0" layoutY="132.0" prefHeight="27.0" prefWidth="161.0" />
-            <DatePicker fx:id="birthDayField" editable="false" layoutX="108.0" layoutY="186.0" prefHeight="27.0" prefWidth="161.0" />
-            <Label layoutX="300.0" layoutY="41.0" prefHeight="17.0" prefWidth="78.0" text="Doctor" />
-            <ComboBox fx:id="doctorMenu" layoutX="403.0" layoutY="36.0" prefHeight="27.0" prefWidth="161.0" />
-            <Label layoutX="300.0" layoutY="88.0" prefHeight="17.0" prefWidth="56.0" text="Initial date" />
-            <DatePicker fx:id="initialDateField" editable="false" layoutX="403.0" layoutY="83.0" prefHeight="27.0" prefWidth="161.0" />
-            <Button layoutX="301.0" layoutY="239.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="78.0" text="Save" />
-            <Button layoutX="403.0" layoutY="239.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="78.0" text="Cancel" />
+            <Label layoutX="14.0" layoutY="88.0" prefHeight="17.0" prefWidth="78.0" text="Имя" />
+            <Label layoutX="14.0" layoutY="191.0" prefHeight="17.0" prefWidth="105.0" text="Дата рождения" />
+            <Label layoutX="14.0" layoutY="136.0" prefHeight="17.0" prefWidth="78.0" text="Отчество" />
+            <Label layoutX="14.0" layoutY="244.0" prefHeight="17.0" prefWidth="105.0" text="Домашний адрес" />
+            <Label layoutX="14.0" layoutY="41.0" prefHeight="17.0" prefWidth="78.0" text="Фамилия" />
+            <Label layoutX="349.0" layoutY="137.0" prefHeight="17.0" prefWidth="78.0" text="Логин" />
+            <Label layoutX="350.0" layoutY="191.0" prefHeight="17.0" prefWidth="78.0" text="Пароль" />
+            <TextField fx:id="surnameField" layoutX="130.0" layoutY="36.0" />
+            <TextField fx:id="loginField" layoutX="428.0" layoutY="131.0" />
+            <TextField fx:id="passwordField" layoutX="428.0" layoutY="186.0" />
+            <TextField fx:id="homeAddressField" layoutX="130.0" layoutY="239.0" />
+            <TextField fx:id="nameField" layoutX="130.0" layoutY="83.0" />
+            <TextField fx:id="patronymicField" layoutX="130.0" layoutY="132.0" prefHeight="27.0" prefWidth="161.0" />
+            <DatePicker fx:id="birthDayField" editable="false" layoutX="130.0" layoutY="187.0" prefHeight="27.0" prefWidth="161.0" />
+            <Label layoutX="349.0" layoutY="41.0" prefHeight="17.0" prefWidth="78.0" text="Доктор" />
+            <ComboBox fx:id="doctorMenu" layoutX="428.0" layoutY="36.0" prefHeight="27.0" prefWidth="161.0" />
+            <Label layoutX="349.0" layoutY="88.0" prefHeight="17.0" prefWidth="78.0" text="Дата приема" />
+            <DatePicker fx:id="initialDateField" editable="false" layoutX="428.0" layoutY="83.0" prefHeight="27.0" prefWidth="161.0" />
+            <Button layoutX="350.0" layoutY="239.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="90.0" text="Сохранить" />
+            <Button layoutX="464.0" layoutY="239.0" mnemonicParsing="false" onAction="#cancel" prefHeight="27.0" prefWidth="90.0" text="Отменить" />
       </children>
     </AnchorPane>
   </children>

@@ -95,13 +95,8 @@ public class NewPatient implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) throws IOException {
-        if(!admin) {
-            changeScene(event, "/receptionistPanel", "Receptionist Panel");
-        }
-        else{
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML

@@ -17,29 +17,29 @@
          <children>
             <TabPane layoutX="10.0" layoutY="10.0" prefHeight="490.0" prefWidth="940.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Patients">
+                <Tab text="Пациенты">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="289.0" prefWidth="635.0">
                            <children>
                               <TableView fx:id="table" layoutX="10.0" layoutY="45.0" prefHeight="370.0" prefWidth="920.0">
                                 <columns>
-                                  <TableColumn fx:id="surnameColumn" minWidth="230.0" prefWidth="230.0" text="Surname" />
-                                  <TableColumn fx:id="nameColumn" minWidth="230.0" prefWidth="230.0" text="Name" />
-                                    <TableColumn fx:id="patronymicColumn" minWidth="230.0" prefWidth="230.0" text="Patronymic" />
-                                    <TableColumn fx:id="idColumn" minWidth="230.0" prefWidth="230.0" text="Identify number" />
+                                  <TableColumn fx:id="surnameColumn" minWidth="230.0" prefWidth="230.0" text="Фамилия" />
+                                  <TableColumn fx:id="nameColumn" minWidth="230.0" prefWidth="230.0" text="Имя" />
+                                    <TableColumn fx:id="patronymicColumn" minWidth="230.0" prefWidth="230.0" text="Отчество" />
+                                    <TableColumn fx:id="idColumn" minWidth="230.0" prefWidth="230.0" text="Идентификационный номер" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="dischargeButton" layoutX="415.0" layoutY="420.0" mnemonicParsing="false" onAction="#discharge" prefHeight="30.0" prefWidth="110.0" text="Discharge" />
-                              <Button fx:id="appointmentButton" layoutX="305.0" layoutY="420.0" mnemonicParsing="false" onAction="#appointment" prefHeight="30.0" prefWidth="110.0" text="Appointment" />
-                              <Button fx:id="newPatButton" layoutX="525.0" layoutY="420.0" mnemonicParsing="false" onAction="#addNewPatient" prefHeight="30.0" prefWidth="110.0" text="Add new patient" />
-                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="105.0" text="Search field">
+                              <Button fx:id="dischargeButton" layoutX="415.0" layoutY="420.0" mnemonicParsing="false" onAction="#discharge" prefHeight="30.0" prefWidth="110.0" text="Удалить" />
+                              <Button fx:id="appointmentButton" layoutX="288.0" layoutY="420.0" mnemonicParsing="false" onAction="#appointment" prefHeight="30.0" prefWidth="127.0" text="Назначить прием" />
+                              <Button fx:id="newPatButton" layoutX="525.0" layoutY="420.0" mnemonicParsing="false" onAction="#addNewPatient" prefHeight="30.0" prefWidth="128.0" text="Добавить нового" />
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="117.0" text="Окно поиска">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="searchField" layoutX="115.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" />
-                              <Button layoutX="828.0" layoutY="12.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="98.0" text="Refresh" />
-                              <Button layoutX="720.0" layoutY="12.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="27.0" prefWidth="98.0" text="Change user" />
+                              <TextField fx:id="searchField" layoutX="127.0" layoutY="11.0" prefHeight="30.0" prefWidth="300.0" />
+                              <Button layoutX="828.0" layoutY="12.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="98.0" text="Обновить" />
+                              <Button layoutX="658.0" layoutY="12.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="27.0" prefWidth="160.0" text="Сменить пользователя" />
                            </children>
                         </AnchorPane>
                   </content>

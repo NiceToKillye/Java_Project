@@ -13,19 +13,19 @@
          <children>
             <TableView fx:id="table" layoutX="10.0" layoutY="10.0" prefHeight="545.0" prefWidth="805.0">
               <columns>
-                <TableColumn fx:id="patientFioColumn" minWidth="100.0" prefWidth="161.0" text="FIO" />
-                <TableColumn fx:id="initialDateColumn" minWidth="100.0" prefWidth="161.0" text="Initial date" />
-                  <TableColumn fx:id="invoiceDateColumn" minWidth="100.0" prefWidth="161.0" text="invoice date" />
-                  <TableColumn fx:id="idColumn" minWidth="100.0" prefWidth="161.0" text="Identify number" />
-                  <TableColumn fx:id="docIdColumn" minWidth="100.0" prefWidth="161.0" text="doc id" />
+                <TableColumn fx:id="patientFioColumn" minWidth="100.0" prefWidth="161.0" text="ФИО" />
+                <TableColumn fx:id="initialDateColumn" minWidth="100.0" prefWidth="161.0" text="Дата приема" />
+                  <TableColumn fx:id="invoiceDateColumn" minWidth="100.0" prefWidth="161.0" text="Дата выписки" />
+                  <TableColumn fx:id="idColumn" minWidth="100.0" prefWidth="180.0" text="Идентификационный номер" />
+                  <TableColumn fx:id="docIdColumn" minWidth="100.0" prefWidth="140.0" text="ID" />
               </columns>
             </TableView>
-            <Button layoutX="301.0" layoutY="564.0" mnemonicParsing="false" onAction="#takePatient" text="Take a patient">
+            <Button layoutX="243.0" layoutY="563.0" mnemonicParsing="false" onAction="#takePatient" prefHeight="28.0" prefWidth="154.0" text="Принять пациента">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button layoutX="421.0" layoutY="565.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="27.0" prefWidth="103.0" text="Change user" />
+            <Button layoutX="428.0" layoutY="564.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="27.0" prefWidth="154.0" text="Сменить пользователя" />
          </children>
     </AnchorPane>
   </children>

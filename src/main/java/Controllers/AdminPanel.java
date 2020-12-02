@@ -84,8 +84,8 @@ public class AdminPanel implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recSurnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         recNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        recPasswordColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
-        recLoginColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
+        recLoginColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
+        recPasswordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
 
         docSurnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         docNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
