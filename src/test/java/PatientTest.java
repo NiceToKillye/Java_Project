@@ -1,5 +1,4 @@
 import Entities.Patient;
-import javafx.collections.FXCollections;
 import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -74,8 +73,7 @@ public class PatientTest extends TestCase {
             System.out.println("The transaction was not completed");
         }
 
-        List doctors = FXCollections.observableArrayList(
-                session.createQuery("from Patient", Patient.class).getResultList());
+        List doctors = session.createQuery("from Patient", Patient.class).getResultList();
         assertTrue(doctors.contains(patient1));
         session.close();
     }

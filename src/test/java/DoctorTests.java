@@ -1,6 +1,5 @@
 import Entities.Doctor;
 import Entities.Speciality;
-import javafx.collections.FXCollections;
 import junit.framework.TestCase;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -75,8 +75,7 @@ public class DoctorTests extends TestCase {
             System.out.println("The transaction was not completed");
         }
 
-        List doctors = FXCollections.observableArrayList(
-                session.createQuery("from Doctor", Doctor.class).getResultList());
+        List doctors = session.createQuery("from Doctor", Doctor.class).getResultList();
         assertTrue(doctors.contains(doctor1));
 
         session.close();
